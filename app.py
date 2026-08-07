@@ -36,6 +36,32 @@ def login():
 
     return render_template('login.html')
 
+# ---------------- EMPLOYEE LOGIN ----------------
+
+@app.route('/employee_login', methods=['GET','POST'])
+def employee_login():
+
+    if request.method == 'POST':
+
+        username = request.form['username']
+        password = request.form['password']
+
+        # Example login
+        if username == "employee" and password == "1234":
+
+            session['employee'] = username
+
+            return redirect('/employee_dashboard')
+
+        else:
+            return "Invalid Employee Login"
+
+    return render_template('employee_login.html')
+
+@app.route('/employee_dashboard')
+def employee_dashboard():
+    return render_template('employee_dashboard.html')
+
 # ---------------- DASHBOARD ----------------
 
 @app.route('/dashboard')
@@ -301,46 +327,6 @@ def search_employee():
         'search_employee.html',
         employees=employees
     )
-
-# ---------------- EMPLOYEE LOGIN ----------------
-
-@app.route('/employee_login', methods=['GET','POST'])
-def employee_login():
-
-    if request.method == 'POST':
-
-        emp_id = request.form['emp_id']
-        password = request.form['password']
-
-
-        conn = sqlite3.connect('attendance.db')
-        cursor = conn.cursor()
-
-
-        cursor.execute(
-            "SELECT * FROM employee WHERE id=? AND password=?",
-            (emp_id,password)
-        )
-
-
-        employee = cursor.fetchone()
-
-
-        conn.close()
-
-
-        if employee:
-
-            return redirect('/employee_dashboard')
-
-
-        else:
-
-            return "Invalid Employee Login"
-
-
-    return render_template('employee_login.html')
-
 
 
 # ---------------- EMPLOYEE DASHBOARD ----------------
