@@ -59,7 +59,7 @@ def employee_login():
     return render_template('employee_login.html')
 
 @app.route('/employee_dashboard')
-def employee_dashboard():
+def employee_login():
     return render_template('employee_dashboard.html')
 
 # ---------------- DASHBOARD ----------------
@@ -333,9 +333,7 @@ def search_employee():
 
 @app.route('/employee_dashboard')
 def employee_dashboard():
-
     return render_template('employee_dashboard.html')
-
 
 # ---------------- DELETE EMPLOYEE ----------------
 
