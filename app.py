@@ -5,6 +5,12 @@ app = Flask(__name__)
 
 app.secret_key = "employee_management_secret_key"
 
+# ---------------- HOME ----------------
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 # ---------------- LOGIN ----------------
 
 @app.route('/login', methods=['GET','POST'])
