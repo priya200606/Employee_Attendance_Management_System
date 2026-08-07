@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Attendance Management System</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        /* Navigation Bar */
+
+        nav{
+            background:#0d6efd;
+            color:white;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 40px;
+        }
+
+        .logo{
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        nav ul{
+            list-style:none;
+            display:flex;
+        }
+
+        nav ul li{
+            margin-left:25px;
+        }
+
+        nav ul li a{
+            color:white;
+            text-decoration:none;
+            font-size:18px;
+        }
+
+        nav ul li a:hover{
+            color:yellow;
+        }
+
+        /* Main Section */
+
+        .container{
+            text-align:center;
+            margin-top:80px;
+        }
+
+        .container h1{
+            font-size:45px;
+            color:#333;
+            margin-bottom:15px;
+        }
+
+        .container p{
+            font-size:22px;
+            color:#666;
+            margin-bottom:35px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 30px;
+            margin:10px;
+            background:#0d6efd;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#084298;
+        }
+
+        /* Footer */
+
+        .footer{
+            position:fixed;
+            bottom:0;
+            width:100%;
+            background:#222;
+            color:white;
+            text-align:center;
+            padding:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+
+    <nav>
+
+        <div class="logo">
+            EAMS
+        </div>
+
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="/login">Admin Login</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- Main Content -->
+
+    <div class="container">
+
+        <h1>Welcome to EAMS</h1>
+
+        <p>BCA Semester 5 Python + Flask Project</p>
+
+        <a href="/login" class="btn">Admin Login</a>
+
+        <a href="#" class="btn">Employee Login</a>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="footer">
+
+        © 2026 Employee Attendance Management System
+
+    </div>
+
+</body>
+</html>

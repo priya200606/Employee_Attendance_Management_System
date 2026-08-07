@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Employee</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+
+.container{
+
+    width:400px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+
+}
+
+
+h1{
+
+    text-align:center;
+    color:#0d6efd;
+
+}
+
+
+input{
+
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+
+}
+
+
+button{
+
+    width:100%;
+    padding:12px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+
+}
+
+
+button:hover{
+
+    background:#084298;
+
+}
+
+
+.back{
+
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    text-decoration:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>Edit Employee</h1>
+
+
+<form method="POST">
+
+
+<label>Employee ID</label>
+
+<input type="text"
+name="employee_id"
+value="{{ employee[1] }}">
+
+
+<label>Name</label>
+
+<input type="text"
+name="name"
+value="{{ employee[2] }}">
+
+
+<label>Email</label>
+
+<input type="email"
+name="email"
+value="{{ employee[3] }}">
+
+
+<label>Department</label>
+
+<input type="text"
+name="department"
+value="{{ employee[4] }}">
+
+
+<label>Mobile</label>
+
+<input type="text"
+name="mobile"
+value="{{ employee[5] }}">
+
+
+<button type="submit">
+Update Employee
+</button>
+
+
+</form>
+
+
+<a class="back" href="/view_employees">
+← Back to Employee List
+</a>
+
+
+</div>
+
+
+</body>
+
+</html>
