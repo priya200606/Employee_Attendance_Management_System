@@ -36,16 +36,6 @@ def login():
 
     return render_template('login.html')
 
-
-
-# ---------------- HOME PAGE ----------------
-
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-
-
 # ---------------- DASHBOARD ----------------
 
 @app.route('/dashboard')
