@@ -46,7 +46,6 @@ def employee_login():
         username = request.form['username']
         password = request.form['password']
 
-        # Example login
         if username == "employee" and password == "1234":
 
             session['employee'] = username
@@ -58,9 +57,13 @@ def employee_login():
 
     return render_template('employee_login.html')
 
+
+# ---------------- EMPLOYEE DASHBOARD ----------------
+
 @app.route('/employee_dashboard')
-def employee_login():
+def employee_dashboard():
     return render_template('employee_dashboard.html')
+
 
 # ---------------- DASHBOARD ----------------
 
@@ -327,13 +330,6 @@ def search_employee():
         'search_employee.html',
         employees=employees
     )
-
-
-# ---------------- EMPLOYEE DASHBOARD ----------------
-
-@app.route('/employee_dashboard')
-def employee_dashboard():
-    return render_template('employee_dashboard.html')
 
 # ---------------- DELETE EMPLOYEE ----------------
 
