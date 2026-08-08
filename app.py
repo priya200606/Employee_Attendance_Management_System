@@ -62,7 +62,7 @@ def employee_login():
 
 @app.route('/employee_dashboard')
 def employee_dashboard():
-    return "<h1>Employee Dashboard Working!</h1>"
+    return render_template('employee_dashboard.html')
 
 # ---------------- DASHBOARD ----------------
 
