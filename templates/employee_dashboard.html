@@ -5,9 +5,9 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
             margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
         }
 
         .header {
@@ -20,21 +20,20 @@
         .container {
             width: 80%;
             margin: 40px auto;
-            text-align: center;
         }
 
         .card {
             background: white;
             padding: 30px;
-            margin: 20px auto;
-            max-width: 500px;
+            text-align: center;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        .logout {
+        .btn {
             display: inline-block;
             padding: 12px 25px;
+            margin-top: 20px;
             background: #dc3545;
             color: white;
             text-decoration: none;
@@ -45,21 +44,25 @@
 
 <body>
 
-<div class="header">
-    <h1>Employee Dashboard</h1>
-</div>
-
-<div class="container">
-
-    <div class="card">
-        <h2>Welcome Employee</h2>
-
-        <p>You have successfully logged in.</p>
-
-        <a href="/logout" class="logout">Logout</a>
+    <div class="header">
+        <h1>Employee Dashboard</h1>
     </div>
 
-</div>
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Welcome Employee 👋</h2>
+
+            <p>You have successfully logged in.</p>
+
+            <p>Employee Attendance Management System</p>
+
+            <a href="/logout" class="btn">Logout</a>
+
+        </div>
+
+    </div>
 
 </body>
 </html>
