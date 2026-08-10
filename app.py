@@ -42,103 +42,146 @@ def employee_login():
 
     if request.method == 'POST':
 
-        employee_id = request.form['username']
-        password = request.form['password']
+        employee_id = request.form['username'].strip()
+        password = request.form['password'].strip()
 
-        if password == "1234":
+        conn = sqlite3.connect('employee.db')
+        cur = conn.cursor()
 
-            conn = sqlite3.connect('employee.db')
-            cur = conn.cursor()
+        cur.execute(
+            "SELECT employee_id, name FROM employee WHERE employee_id=?",
+            (employee_id,)
+        )
 
-            cur.execute(
-                "SELECT employee_id FROM employee WHERE employee_id=?",
-                (employee_id,)
-            )
+        employee = cur.fetchone()
 
-            employee = cur.fetchone()
+        conn.close()
 
-            conn.close()
+        if employee and password == "1234":
 
-            if employee:
+            session['employee'] = employee[0]
 
-                session['employee'] = employee_id
-
-                return redirect('/employee_dashboard')
+            return redirect('/employee_dashboard')
 
         return "Invalid Employee ID or Password"
 
     return render_template('employee_login.html')
-
 
 # ---------------- EMPLOYEE DASHBOARD ----------------
 
 @app.route('/employee_dashboard')
 def employee_dashboard():
 
+    # Logged-in Employee ID
     employee_id = session.get('employee')
 
+    # Default values
     total_days = 0
     present = 0
     absent = 0
     percentage = 0
     attendance = []
 
+    employee_name = "Employee"
+    employee_department = ""
+    employee_email = ""
+    employee_mobile = ""
+
+    # Check login
     if employee_id:
 
         conn = sqlite3.connect('employee.db')
         cur = conn.cursor()
 
-        # Total Attendance
-        cur.execute(
-            "SELECT COUNT(*) FROM attendance WHERE employee_id=?",
-            (employee_id,)
-        )
+        # ---------------- EMPLOYEE DETAILS ----------------
+
+        cur.execute("""
+            SELECT employee_id, name, email, department, mobile
+            FROM employee
+            WHERE employee_id=?
+        """, (employee_id,))
+
+        employee = cur.fetchone()
+
+        if employee:
+
+            employee_id = employee[0]
+            employee_name = employee[1]
+            employee_email = employee[2]
+            employee_department = employee[3]
+            employee_mobile = employee[4]
+
+        # ---------------- TOTAL ATTENDANCE DAYS ----------------
+
+        cur.execute("""
+            SELECT COUNT(*)
+            FROM attendance
+            WHERE employee_id=?
+        """, (employee_id,))
 
         total_days = cur.fetchone()[0]
 
-        # Present
-        cur.execute(
-            "SELECT COUNT(*) FROM attendance WHERE employee_id=? AND status='Present'",
-            (employee_id,)
-        )
+        # ---------------- PRESENT ----------------
+
+        cur.execute("""
+            SELECT COUNT(*)
+            FROM attendance
+            WHERE employee_id=?
+            AND status='Present'
+        """, (employee_id,))
 
         present = cur.fetchone()[0]
 
-        # Absent
-        cur.execute(
-            "SELECT COUNT(*) FROM attendance WHERE employee_id=? AND status='Absent'",
-            (employee_id,)
-        )
+        # ---------------- ABSENT ----------------
+
+        cur.execute("""
+            SELECT COUNT(*)
+            FROM attendance
+            WHERE employee_id=?
+            AND status='Absent'
+        """, (employee_id,))
 
         absent = cur.fetchone()[0]
 
-        # Attendance Details
-        cur.execute(
-            "SELECT date, status FROM attendance WHERE employee_id=? ORDER BY date DESC",
-            (employee_id,)
-        )
+        # ---------------- ATTENDANCE DETAILS ----------------
+
+        cur.execute("""
+            SELECT date, status
+            FROM attendance
+            WHERE employee_id=?
+            ORDER BY date DESC
+        """, (employee_id,))
 
         attendance = cur.fetchall()
 
         conn.close()
 
-        # Percentage
-        if total_days > 0:
+        # ---------------- ATTENDANCE PERCENTAGE ----------------
 
+        if total_days > 0:
             percentage = round(
                 (present / total_days) * 100,
                 2
             )
 
+    # ---------------- SEND DATA TO HTML ----------------
+
     return render_template(
         'employee_dashboard.html',
+
+        employee_id=employee_id,
+        employee_name=employee_name,
+        employee_email=employee_email,
+        employee_department=employee_department,
+        employee_mobile=employee_mobile,
+
         total_days=total_days,
         present=present,
         absent=absent,
         percentage=percentage,
+
         attendance=attendance
     )
-
 
 # ---------------- ADMIN DASHBOARD ----------------
 
