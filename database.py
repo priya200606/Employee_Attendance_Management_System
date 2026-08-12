@@ -1,17 +1,15 @@
 import sqlite3
 
+
 def connect_db():
 
     conn = sqlite3.connect('employee.db')
     cursor = conn.cursor()
 
-    # Delete old tables
-    cursor.execute("DROP TABLE IF EXISTS employee")
-    cursor.execute("DROP TABLE IF EXISTS attendance")
+    # ---------------- EMPLOYEE TABLE ----------------
 
-    # Employee Table
     cursor.execute("""
-    CREATE TABLE employee(
+    CREATE TABLE IF NOT EXISTS employee(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         employee_id TEXT,
         name TEXT,
@@ -21,9 +19,10 @@ def connect_db():
     )
     """)
 
-    # Attendance Table
+    # ---------------- ATTENDANCE TABLE ----------------
+
     cursor.execute("""
-    CREATE TABLE attendance(
+    CREATE TABLE IF NOT EXISTS attendance(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         employee_id TEXT,
         date TEXT,
@@ -31,10 +30,22 @@ def connect_db():
     )
     """)
 
+    # ---------------- LEAVE TABLE ----------------
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS leave_request(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        employee_id TEXT,
+        leave_date TEXT,
+        reason TEXT,
+        status TEXT DEFAULT 'Pending'
+    )
+    """)
 
     conn.commit()
     conn.close()
 
     print("Database Created Successfully")
+
 
 connect_db()

@@ -4,7 +4,9 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Employee Dashboard</title>
 
@@ -12,307 +14,441 @@
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
         }
 
         body {
-            background: #f4f6f9;
+            margin: 0;
+            padding: 25px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8f7;
+            color: #1e293b;
         }
 
-        /* ---------------- HEADER ---------------- */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
 
         .header {
-            background: #007bff;
-            color: white;
-            padding: 20px 40px;
+            background: linear-gradient(
+                135deg,
+                #134e4a,
+                #0f766e
+            );
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 8px 25px rgba(15, 118, 110, 0.22);
         }
 
         .header h1 {
-            font-size: 25px;
+            margin: 0 0 10px;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #d9fffa;
+            font-size: 15px;
+        }
+
+
+        /* =========================================
+           BUTTONS
+        ========================================= */
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 9px;
+            color: white;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .leave-btn {
+            background: #f59e0b;
         }
 
         .logout {
             background: #dc3545;
-            color: white;
-            text-decoration: none;
+        }
 
-            padding: 10px 18px;
-            border-radius: 6px;
+        .buttons a:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
 
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        .message {
+            background: #dff7f3;
+            color: #115e59;
+            padding: 15px 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             font-weight: bold;
+            border-left: 5px solid #0f766e;
         }
 
-        .logout:hover {
-            background: #bb2d3b;
-        }
 
-        /* ---------------- CONTAINER ---------------- */
+        /* =========================================
+           COMMON SECTION
+        ========================================= */
 
-        .container {
-            width: 90%;
-            max-width: 1150px;
-            margin: 35px auto;
-        }
-
-        /* ---------------- WELCOME ---------------- */
-
-        .welcome {
+        .section {
             background: white;
             padding: 25px;
-
-            border-radius: 12px;
+            border-radius: 15px;
+            margin-bottom: 25px;
 
             box-shadow:
-                0 2px 10px rgba(0,0,0,0.10);
-
-            margin-bottom: 25px;
+                0 5px 18px rgba(15, 23, 42, 0.07);
         }
 
-        .welcome h2 {
-            margin-bottom: 12px;
-            color: #111;
+        .section h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #134e4a;
+            font-size: 21px;
         }
 
-        .welcome p {
-            margin-top: 7px;
-            color: #444;
-        }
 
-        .welcome strong {
-            color: #007bff;
-        }
-
-        /* ---------------- EMPLOYEE DETAILS ---------------- */
+        /* =========================================
+           EMPLOYEE DETAILS
+        ========================================= */
 
         .details {
-            background: white;
-
-            padding: 25px;
-
-            border-radius: 12px;
-
-            box-shadow:
-                0 2px 10px rgba(0,0,0,0.10);
-
-            margin-bottom: 25px;
-        }
-
-        .details h2 {
-            margin-bottom: 20px;
-        }
-
-        .details-grid {
             display: grid;
-
             grid-template-columns:
-                repeat(2, 1fr);
+                repeat(auto-fit, minmax(220px, 1fr));
 
             gap: 15px;
         }
 
-        .detail-box {
-            background: #f8f9fa;
+        .detail {
+            background: #f0fdfa;
+            padding: 17px;
+            border-radius: 10px;
 
-            padding: 15px;
+            border: 1px solid #ccfbf1;
 
-            border-radius: 8px;
-
-            border-left: 4px solid #007bff;
+            transition: 0.2s;
         }
 
-        .detail-title {
+        .detail:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 5px 15px rgba(15, 118, 110, 0.10);
+        }
+
+        .detail strong {
+            display: block;
+            margin-bottom: 7px;
+            color: #0f766e;
             font-size: 13px;
-            color: #777;
-
-            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
         }
 
-        .detail-value {
-            font-size: 17px;
+
+        /* =========================================
+           TODAY ATTENDANCE
+        ========================================= */
+
+        .today-box {
+            background: #f8fffe;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #ccfbf1;
+        }
+
+        .today-row {
+            margin: 14px 0;
+            font-size: 16px;
+        }
+
+        .today-row strong {
+            color: #334155;
+        }
+
+        .check-in {
+            color: #059669;
             font-weight: bold;
-            color: #222;
         }
 
-        /* ---------------- CARDS ---------------- */
+        .check-out {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .working-hours {
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        .half {
+            color: #0f766e;
+            font-weight: bold;
+        }
+
+        .completed {
+            background: #dcfce7;
+            color: #166534;
+            padding: 14px;
+            border-radius: 10px;
+            margin-top: 18px;
+            font-weight: bold;
+            border-left: 5px solid #10b981;
+        }
+
+
+        /* =========================================
+           ATTENDANCE BUTTON
+        ========================================= */
+
+        .attendance-actions {
+            margin-top: 20px;
+        }
+
+        .checkout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+
+        /* =========================================
+           STATISTICS CARDS
+        ========================================= */
 
         .cards {
             display: grid;
 
             grid-template-columns:
-                repeat(5, 1fr);
+                repeat(auto-fit, minmax(180px, 1fr));
 
             gap: 18px;
 
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .card {
             background: white;
-
-            padding: 25px 15px;
-
-            border-radius: 12px;
-
+            padding: 22px;
+            border-radius: 14px;
             text-align: center;
 
             box-shadow:
-                0 2px 10px rgba(0,0,0,0.10);
+                0 5px 18px rgba(15, 23, 42, 0.07);
+
+            border-top: 4px solid #0f766e;
+
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
         }
 
         .card h3 {
-            color: #555;
-
-            margin-bottom: 12px;
-
-            font-size: 17px;
+            margin: 0;
+            font-size: 15px;
+            color: #64748b;
         }
 
         .number {
+            margin-top: 10px;
             font-size: 30px;
-
             font-weight: bold;
-
-            color: #007bff;
         }
 
-        .present {
-            color: #198754;
+        .blue {
+            color: #0f766e;
         }
 
-        .absent {
+        .green {
+            color: #059669;
+        }
+
+        .red {
             color: #dc3545;
         }
 
-        .leave {
-            color: #fd7e14;
+        .orange {
+            color: #f59e0b;
         }
 
-        .percentage {
-            color: #6f42c1;
-        }
 
-        /* ---------------- ATTENDANCE ---------------- */
+        /* =========================================
+           ATTENDANCE OVERVIEW
+        ========================================= */
 
-        .attendance {
-            background: white;
-
-            padding: 25px;
-
+        .progress-box {
+            background: #f0fdfa;
+            padding: 20px;
             border-radius: 12px;
-
-            box-shadow:
-                0 2px 10px rgba(0,0,0,0.10);
+            border: 1px solid #ccfbf1;
         }
 
-        .attendance h2 {
-            margin-bottom: 20px;
+        .progress-box strong {
+            color: #134e4a;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 27px;
+            background: #dbe7e5;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 13px;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                #0f766e,
+                #14b8a6
+            );
+
+            text-align: center;
+            color: white;
+            font-size: 13px;
+            line-height: 27px;
+            font-weight: bold;
+
+            transition: width 0.5s ease;
+        }
+
+
+        /* =========================================
+           TABLE
+        ========================================= */
+
+        .table-container {
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
-
             border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 13px;
-
-            text-align: center;
-
-            border-bottom: 1px solid #ddd;
+            min-width: 850px;
         }
 
         th {
-            background: #007bff;
-
+            background: #134e4a;
             color: white;
+            padding: 14px;
+            text-align: left;
+            font-size: 14px;
         }
 
-        tr:hover {
-            background: #f8f9fa;
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
         }
 
-        /* ---------------- STATUS ---------------- */
+        tbody tr:hover {
+            background: #f0fdfa;
+        }
 
-        .status-present {
-            color: #198754;
-
+        .present-status {
+            color: #059669;
             font-weight: bold;
         }
 
-        .status-absent {
+        .absent-status {
             color: #dc3545;
-
             font-weight: bold;
         }
 
-        .status-leave {
-            color: #fd7e14;
-
+        .hours {
+            color: #7c3aed;
             font-weight: bold;
         }
 
-        .no-data {
-            color: #777;
 
-            padding: 20px;
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .footer {
+            text-align: center;
+            color: #64748b;
+            margin-top: 30px;
+            padding-bottom: 15px;
+            font-size: 14px;
         }
 
-        /* ---------------- RESPONSIVE ---------------- */
 
-        @media (max-width: 1000px) {
+        /* =========================================
+           MOBILE
+        ========================================= */
 
-            .cards {
-                grid-template-columns:
-                    repeat(3, 1fr);
-            }
+        @media (max-width: 600px) {
 
-        }
-
-        @media (max-width: 700px) {
-
-            .cards {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-            .details-grid {
-                grid-template-columns: 1fr;
+            body {
+                padding: 15px;
             }
 
             .header {
-                padding: 15px 20px;
-            }
-
-            .container {
-                width: 95%;
-            }
-
-            table {
-                font-size: 14px;
-            }
-
-        }
-
-        @media (max-width: 500px) {
-
-            .cards {
-                grid-template-columns: 1fr;
+                padding: 22px;
             }
 
             .header h1 {
-                font-size: 20px;
+                font-size: 24px;
             }
 
-            .logout {
-                padding: 8px 12px;
+            .buttons {
+                flex-direction: column;
+            }
+
+            .buttons a {
+                text-align: center;
+                width: 100%;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .number {
+                font-size: 27px;
+            }
+
+            .today-row {
+                font-size: 15px;
             }
 
         }
@@ -324,341 +460,972 @@
 
 <body>
 
-
-<!-- ================= HEADER ================= -->
-
-<div class="header">
-
-    <h1>
-        Employee Dashboard
-    </h1>
-
-    <a href="/logout" class="logout">
-        Logout
-    </a>
-
-</div>
-
-
 <div class="container">
 
 
-<!-- ================= WELCOME ================= -->
+    <!-- =========================================
+         HEADER
+    ========================================= -->
 
-<div class="welcome">
+    <div class="header">
 
-    <h2>
-        Welcome {{ employee_name }} 👋
-    </h2>
+        <h1>
+            Welcome {{ employee_name }} 👋
+        </h1>
 
-    <p>
-        You have successfully logged in to the
-        Employee Attendance Management System.
-    </p>
+        <p>
+            You have successfully logged in to the
+            Employee Attendance Management System.
+        </p>
 
-</div>
-
-
-<!-- ================= EMPLOYEE DETAILS ================= -->
-
-<div class="details">
-
-    <h2>
-        👤 Employee Details
-    </h2>
+    </div>
 
 
-    <div class="details-grid">
+    <!-- =========================================
+         BUTTONS
+    ========================================= -->
+
+    <div class="buttons">
+
+        <a href="/apply_leave" class="leave-btn">
+            📝 Apply Leave
+        </a>
+
+        <a href="/logout" class="logout">
+            🚪 Logout
+        </a>
+
+    </div>
 
 
-        <!-- Employee ID -->
+    <!-- =========================================
+         MESSAGE
+    ========================================= -->
 
-        <div class="detail-box">
+    {% if message %}
 
-            <div class="detail-title">
-                Employee ID
-            </div>
+    <div class="message">
+        {{ message }}
+    </div>
 
-            <div class="detail-value">
+    {% endif %}
+
+
+    <!-- =========================================
+         EMPLOYEE DETAILS
+    ========================================= -->
+
+    <div class="section">
+
+        <h2>
+            👤 Employee Details
+        </h2>
+
+        <div class="details">
+
+            <div class="detail">
+                <strong>Employee ID</strong>
                 {{ employee_id }}
             </div>
 
-        </div>
-
-
-        <!-- Employee Name -->
-
-        <div class="detail-box">
-
-            <div class="detail-title">
-                Employee Name
-            </div>
-
-            <div class="detail-value">
+            <div class="detail">
+                <strong>Employee Name</strong>
                 {{ employee_name }}
             </div>
 
-        </div>
-
-
-        <!-- Department -->
-
-        <div class="detail-box">
-
-            <div class="detail-title">
-                Department
-            </div>
-
-            <div class="detail-value">
+            <div class="detail">
+                <strong>Department</strong>
                 {{ employee_department }}
             </div>
 
-        </div>
-
-
-        <!-- Email -->
-
-        <div class="detail-box">
-
-            <div class="detail-title">
-                Email
-            </div>
-
-            <div class="detail-value">
+            <div class="detail">
+                <strong>Email</strong>
                 {{ employee_email }}
             </div>
 
-        </div>
-
-
-        <!-- Mobile -->
-
-        <div class="detail-box">
-
-            <div class="detail-title">
-                Mobile Number
-            </div>
-
-            <div class="detail-value">
+            <div class="detail">
+                <strong>Mobile Number</strong>
                 {{ employee_mobile }}
             </div>
 
         </div>
 
-
-    </div>
-
-</div>
-
-
-<!-- ================= ATTENDANCE CARDS ================= -->
-
-<div class="cards">
-
-
-    <!-- Total Days -->
-
-    <div class="card">
-
-        <h3>
-            Total Days
-        </h3>
-
-        <div class="number">
-            {{ total_days }}
-        </div>
-
     </div>
 
 
-    <!-- Present -->
+    <!-- =========================================
+         TODAY'S ATTENDANCE
+    ========================================= -->
 
-    <div class="card">
+    <div class="section">
 
-        <h3>
-            Present
-        </h3>
+        <h2>
+            🕐 Today's Attendance
+        </h2>
 
-        <div class="number present">
-            {{ present }}
-        </div>
+        <div class="today-box">
 
-    </div>
+            <div class="today-row">
 
+                <strong>Date:</strong>
 
-    <!-- Absent -->
+                {{ today }}
 
-    <div class="card">
-
-        <h3>
-            Absent
-        </h3>
-
-        <div class="number absent">
-            {{ absent }}
-        </div>
-
-    </div>
+            </div>
 
 
-    <!-- Leave -->
+            {% if today_attendance %}
 
-    <div class="card">
 
-        <h3>
-            Leave
-        </h3>
+            <div class="today-row">
 
-        <div class="number leave">
+                <strong>Attendance:</strong>
 
-            {% set leave_count = 0 %}
+                <span class="present-status">
+                    {{ today_attendance[2] }}
+                </span>
 
-            {% for record in attendance %}
+            </div>
 
-                {% if record[1] == 'Leave' %}
 
-                    {% set leave_count = leave_count + 1 %}
+            <div class="today-row">
+
+                <strong>Attendance Type:</strong>
+
+                {% if today_attendance[5] %}
+
+                <span class="half">
+                    {{ today_attendance[5] }}
+                </span>
+
+                {% else %}
+
+                -
 
                 {% endif %}
 
-            {% endfor %}
+            </div>
 
-            {{ leave_count }}
+
+            <div class="today-row">
+
+                <strong>Check In:</strong>
+
+                {% if today_attendance[3] %}
+
+                <span class="check-in">
+                    {{ today_attendance[3] }}
+                </span>
+
+                {% else %}
+
+                -
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="today-row">
+
+                <strong>Check Out:</strong>
+
+                {% if today_attendance[4] %}
+
+                <span class="check-out">
+                    {{ today_attendance[4] }}
+                </span>
+
+                {% else %}
+
+                <span class="check-out">
+                    Not Checked Out
+                </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =================================
+                 WORKING HOURS
+            ================================= -->
+
+            <div class="today-row">
+
+                <strong>
+                    Working Hours:
+                </strong>
+
+                <span
+                    class="working-hours"
+                    id="todayWorkingHours"
+                    data-check-in="{{ today_attendance[3] or '' }}"
+                    data-check-out="{{ today_attendance[4] or '' }}"
+                >
+                    -
+                </span>
+
+            </div>
+
+
+            {% if today_attendance[3] and today_attendance[4] %}
+
+            <div class="completed">
+
+                ✅ Today's attendance completed.
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- =================================
+                 CHECK OUT BUTTON
+            ================================= -->
+
+            {% if today_attendance[3] and not today_attendance[4] %}
+
+            <div class="attendance-actions">
+
+                <form
+                    method="POST"
+                    action="/employee_check_out"
+                >
+
+                    <button
+                        type="submit"
+                        class="checkout-btn"
+                    >
+
+                        🔴 Check Out
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endif %}
+
+
+            {% else %}
+
+
+            <div class="today-row">
+
+                <strong>
+                    Attendance:
+                </strong>
+
+                <span class="absent-status">
+                    Not Marked
+                </span>
+
+            </div>
+
+
+            <p>
+                Please contact the administrator to mark
+                your attendance.
+            </p>
+
+
+            {% endif %}
 
         </div>
 
     </div>
 
 
-    <!-- Percentage -->
+    <!-- =========================================
+         STATISTICS
+    ========================================= -->
 
-    <div class="card">
+    <div class="cards">
 
-        <h3>
-            Attendance %
-        </h3>
 
-        <div class="number percentage">
-            {{ percentage }}%
+        <div class="card">
+
+            <h3>
+                Total Days
+            </h3>
+
+            <div class="number blue">
+                {{ total_days }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🟢 Present
+            </h3>
+
+            <div class="number green">
+                {{ present }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🔴 Absent
+            </h3>
+
+            <div class="number red">
+                {{ absent }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🟠 Pending Leave
+            </h3>
+
+            <div class="number orange">
+                {{ pending_leave }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🟢 Approved Leave
+            </h3>
+
+            <div class="number green">
+                {{ approved_leave }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🔴 Rejected Leave
+            </h3>
+
+            <div class="number red">
+                {{ rejected_leave }}
+            </div>
+
         </div>
 
     </div>
 
 
-</div>
+    <!-- =========================================
+         ATTENDANCE OVERVIEW
+    ========================================= -->
+
+    <div class="section">
+
+        <h2>
+            📊 Attendance Overview
+        </h2>
+
+        <div class="progress-box">
+
+            <strong>
+                Attendance {{ percentage }}%
+            </strong>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress"
+                    id="attendanceProgress"
+                    data-percentage="{{ percentage }}"
+                >
+
+                    {{ percentage }}%
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 
-<!-- ================= MY ATTENDANCE ================= -->
+    <!-- =========================================
+         MY ATTENDANCE
+    ========================================= -->
 
-<div class="attendance">
+    <div class="section">
+
+        <h2>
+            📅 My Attendance
+        </h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Attendance Type
+                        </th>
+
+                        <th>
+                            Check In
+                        </th>
+
+                        <th>
+                            Check Out
+                        </th>
+
+                        <th>
+                            Working Hours
+                        </th>
+
+                    </tr>
+
+                </thead>
 
 
-    <h2>
-        📅 My Attendance
-    </h2>
-
-
-    <table>
-
-
-        <thead>
-
-            <tr>
-
-                <th>
-                    Date
-                </th>
-
-                <th>
-                    Status
-                </th>
-
-            </tr>
-
-        </thead>
-
-
-        <tbody>
-
-
-            {% if attendance %}
+                <tbody>
 
 
                 {% for record in attendance %}
 
+
                 <tr>
 
 
-                    <!-- Date -->
+                    <!-- DATE -->
 
                     <td>
                         {{ record[0] }}
                     </td>
 
 
-                    <!-- Status -->
+                    <!-- STATUS -->
 
                     <td>
 
-                        {% if record[1] == 'Present' %}
+                        {% if record[1] == "Present" %}
 
-                            <span class="status-present">
-                                Present
-                            </span>
-
-                        {% elif record[1] == 'Absent' %}
-
-                            <span class="status-absent">
-                                Absent
-                            </span>
-
-                        {% elif record[1] == 'Leave' %}
-
-                            <span class="status-leave">
-                                Leave
-                            </span>
+                        <span class="present-status">
+                            🟢 Present
+                        </span>
 
                         {% else %}
 
-                            {{ record[1] }}
+                        <span class="absent-status">
+                            🔴 {{ record[1] }}
+                        </span>
 
                         {% endif %}
 
                     </td>
 
 
+                    <!-- ATTENDANCE TYPE -->
+
+                    <td>
+
+                        {% if record[4] %}
+
+                        <span class="half">
+                            {{ record[4] }}
+                        </span>
+
+                        {% else %}
+
+                        -
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- CHECK IN -->
+
+                    <td>
+
+                        {% if record[2] %}
+
+                        {{ record[2] }}
+
+                        {% else %}
+
+                        -
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- CHECK OUT -->
+
+                    <td>
+
+                        {% if record[3] %}
+
+                        {{ record[3] }}
+
+                        {% else %}
+
+                        -
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- WORKING HOURS -->
+
+                    <td>
+
+                        <span
+                            class="hours working-hour-cell"
+                            data-check-in="{{ record[2] or '' }}"
+                            data-check-out="{{ record[3] or '' }}"
+                        >
+                            -
+                        </span>
+
+                    </td>
+
+
                 </tr>
 
-                {% endfor %}
 
-
-            {% else %}
+                {% else %}
 
 
                 <tr>
 
-                    <td colspan="2" class="no-data">
+                    <td
+                        colspan="6"
+                        style="text-align:center;"
+                    >
 
-                        No Attendance Data
+                        No attendance records found.
 
                     </td>
 
                 </tr>
 
 
-            {% endif %}
+                {% endfor %}
 
 
-        </tbody>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 
-    </table>
+    <!-- =========================================
+         LEAVE HISTORY
+    ========================================= -->
+
+    <div class="section">
+
+        <h2>
+            📋 My Leave History
+        </h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Leave Date
+                        </th>
+
+                        <th>
+                            Reason
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                {% for leave in leave_history %}
+
+
+                <tr>
+
+                    <td>
+                        {{ leave[0] }}
+                    </td>
+
+                    <td>
+                        {{ leave[1] }}
+                    </td>
+
+                    <td>
+
+                        {% if leave[2] == "Approved" %}
+
+                        <span class="present-status">
+                            🟢 Approved
+                        </span>
+
+                        {% elif leave[2] == "Rejected" %}
+
+                        <span class="absent-status">
+                            🔴 Rejected
+                        </span>
+
+                        {% else %}
+
+                        <span class="half">
+                            🟠 Pending
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+
+                {% else %}
+
+
+                <tr>
+
+                    <td
+                        colspan="3"
+                        style="text-align:center;"
+                    >
+
+                        No leave history found.
+
+                    </td>
+
+                </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <div class="footer">
+
+        Employee Attendance Management System
+
+        <br>
+
+        Employee Panel
+
+    </div>
 
 
 </div>
 
 
-</div>
+<script>
+
+
+/* =========================================
+   ATTENDANCE PROGRESS BAR
+========================================= */
+
+const progressBar =
+    document.getElementById("attendanceProgress");
+
+if (progressBar) {
+
+    let percentage =
+        parseFloat(
+            progressBar.getAttribute("data-percentage")
+        );
+
+    if (isNaN(percentage)) {
+        percentage = 0;
+    }
+
+    if (percentage < 0) {
+        percentage = 0;
+    }
+
+    if (percentage > 100) {
+        percentage = 100;
+    }
+
+    progressBar.style.width =
+        percentage + "%";
+}
+
+
+/* =========================================
+   WORKING HOURS CALCULATOR
+========================================= */
+
+function calculateWorkingHours(
+    checkIn,
+    checkOut
+) {
+
+    if (!checkIn || !checkOut) {
+        return "-";
+    }
+
+    try {
+
+        const inParts =
+            checkIn.trim().split(" ");
+
+        const outParts =
+            checkOut.trim().split(" ");
+
+
+        if (
+            inParts.length < 2 ||
+            outParts.length < 2
+        ) {
+
+            return "-";
+
+        }
+
+
+        let inTime =
+            inParts[0].split(":");
+
+        let inPeriod =
+            inParts[1].toUpperCase();
+
+
+        let outTime =
+            outParts[0].split(":");
+
+        let outPeriod =
+            outParts[1].toUpperCase();
+
+
+        let inHour =
+            parseInt(inTime[0]);
+
+        let inMinute =
+            parseInt(inTime[1]);
+
+
+        let outHour =
+            parseInt(outTime[0]);
+
+        let outMinute =
+            parseInt(outTime[1]);
+
+
+        /* Convert AM/PM */
+
+        if (
+            inPeriod === "PM" &&
+            inHour !== 12
+        ) {
+
+            inHour += 12;
+
+        }
+
+
+        if (
+            inPeriod === "AM" &&
+            inHour === 12
+        ) {
+
+            inHour = 0;
+
+        }
+
+
+        if (
+            outPeriod === "PM" &&
+            outHour !== 12
+        ) {
+
+            outHour += 12;
+
+        }
+
+
+        if (
+            outPeriod === "AM" &&
+            outHour === 12
+        ) {
+
+            outHour = 0;
+
+        }
+
+
+        const startMinutes =
+            (inHour * 60) + inMinute;
+
+
+        const endMinutes =
+            (outHour * 60) + outMinute;
+
+
+        let difference =
+            endMinutes - startMinutes;
+
+
+        /* Overnight */
+
+        if (difference < 0) {
+
+            difference +=
+                24 * 60;
+
+        }
+
+
+        const hours =
+            Math.floor(
+                difference / 60
+            );
+
+
+        const minutes =
+            difference % 60;
+
+
+        return (
+            hours +
+            " hr " +
+            minutes +
+            " min"
+        );
+
+    }
+
+    catch (error) {
+
+        return "-";
+
+    }
+
+}
+
+
+/* =========================================
+   TODAY WORKING HOURS
+========================================= */
+
+const todayWorkingHours =
+    document.getElementById(
+        "todayWorkingHours"
+    );
+
+
+if (todayWorkingHours) {
+
+    const checkIn =
+        todayWorkingHours
+            .getAttribute(
+                "data-check-in"
+            );
+
+
+    const checkOut =
+        todayWorkingHours
+            .getAttribute(
+                "data-check-out"
+            );
+
+
+    todayWorkingHours.textContent =
+        calculateWorkingHours(
+            checkIn,
+            checkOut
+        );
+
+}
+
+
+/* =========================================
+   ATTENDANCE TABLE WORKING HOURS
+========================================= */
+
+const workingHourCells =
+    document.querySelectorAll(
+        ".working-hour-cell"
+    );
+
+
+workingHourCells.forEach(
+    function(cell) {
+
+        const checkIn =
+            cell.getAttribute(
+                "data-check-in"
+            );
+
+
+        const checkOut =
+            cell.getAttribute(
+                "data-check-out"
+            );
+
+
+        cell.textContent =
+            calculateWorkingHours(
+                checkIn,
+                checkOut
+            );
+
+    }
+);
+
+
+</script>
 
 
 </body>

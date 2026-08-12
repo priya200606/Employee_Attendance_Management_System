@@ -2,124 +2,387 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance</title>
 
-<title>Mark Attendance</title>
+    <style>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+        }
 
-<style>
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
 
-body{
-    background:#f4f6f9;
-}
+            background: linear-gradient(
+                135deg,
+                #0f766e,
+                #14b8a6
+            );
 
-.container{
-    max-width:600px;
-    margin-top:40px;
-}
+            min-height: 100vh;
+            color: #263238;
+        }
 
-.card{
-    border-radius:15px;
-}
+        .container {
+            max-width: 650px;
+            margin: auto;
+        }
 
-h2{
-    color:#0d6efd;
-    text-align:center;
-    margin-bottom:20px;
-}
+        /* HEADER */
 
-</style>
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.18);
+
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #0f766e;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+            color: #607d8b;
+        }
+
+        /* MAIN CARD */
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #0f766e;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #37474f;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+
+            border: 1px solid #b2dfdb;
+            border-radius: 9px;
+
+            font-size: 15px;
+            outline: none;
+
+            background: #f8ffff;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #0f766e;
+
+            box-shadow:
+                0 0 0 3px rgba(15, 118, 110, 0.12);
+        }
+
+        /* BUTTON */
+
+        .submit-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: #0f766e;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #115e59;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 15px rgba(15, 118, 110, 0.25);
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn {
+            display: block;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            background: #ccfbf1;
+            color: #0f766e;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #99f6e4;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+
+            color: white;
+
+            margin-top: 25px;
+
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .header h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
 
 </head>
+
 
 <body>
 
 <div class="container">
 
-<div class="card shadow">
 
-<div class="card-body">
+    <!-- HEADER -->
 
-<h2>📅 Mark Attendance</h2>
+    <div class="header">
 
-<form method="POST">
+        <h1>
+            📋 Mark Attendance
+        </h1>
 
-<div class="mb-3">
+        <p>
+            Employee Attendance Management System
+        </p>
 
-<label class="form-label">
-Employee
-</label>
+    </div>
 
-<select class="form-select" name="employee_id" required>
 
-<option value="">
-Select Employee
-</option>
+    <!-- FORM CARD -->
 
-{% for emp in employees %}
+    <div class="card">
 
-<option value="{{ emp[1] }}">
-    {{ emp[1] }} - {{ emp[2] }}
-</option>
+        <h2>
+            Mark Employee Attendance
+        </h2>
 
-{% endfor %}
 
-</select>
+        <form method="POST" action="/mark_attendance">
+
+
+            <!-- EMPLOYEE -->
+
+            <div class="form-group">
+
+                <label for="employee_id">
+                    Employee
+                </label>
+
+                <select
+                    id="employee_id"
+                    name="employee_id"
+                    required
+                >
+
+                    <option value="">
+                        -- Select Employee --
+                    </option>
+
+
+                    {% for employee in employees %}
+
+                    <option value="{{ employee[1] }}">
+
+                        {{ employee[1] }} -
+                        {{ employee[2] }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div class="form-group">
+
+                <label for="date">
+                    Attendance Date
+                </label>
+
+                <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    required
+                >
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="form-group">
+
+                <label for="status">
+                    Attendance Status
+                </label>
+
+                <select
+                    id="status"
+                    name="status"
+                    required
+                >
+
+                    <option value="">
+                        -- Select Status --
+                    </option>
+
+                    <option value="Present">
+                        🟢 Present
+                    </option>
+
+                    <option value="Absent">
+                        🔴 Absent
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                ✅ Mark Attendance
+            </button>
+
+
+        </form>
+
+
+        <!-- BACK -->
+
+        <a
+            href="/dashboard"
+            class="back-btn"
+        >
+            ← Back to Admin Dashboard
+        </a>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Employee Attendance Management System
+        <br>
+
+        Admin Panel
+
+    </div>
+
 
 </div>
 
-<div class="mb-3">
 
-<label class="form-label">
-Date
-</label>
+<script>
 
-<input
-type="date"
-class="form-control"
-name="date"
-required>
+    // Automatically set today's date
 
-</div>
+    const dateInput =
+        document.getElementById("date");
 
-<div class="mb-3">
+    if (dateInput) {
 
-<label class="form-label">
-Attendance Status
-</label>
+        const today =
+            new Date().toISOString().split("T")[0];
 
-<select class="form-select" name="status" required>
+        dateInput.value = today;
 
-<option value="Present">Present</option>
+    }
 
-<option value="Absent">Absent</option>
+</script>
 
-<option value="Leave">Leave</option>
-
-</select>
-
-</div>
-
-<button class="btn btn-success w-100">
-Save Attendance
-</button>
-
-</form>
-
-<br>
-
-<a href="/login" class="btn btn-secondary w-100">
-⬅ Back to Dashboard
-</a>
-
-</div>
-
-</div>
-
-</div>
 
 </body>
+
 </html>

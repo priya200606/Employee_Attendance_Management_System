@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Leave Requests</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #0f766e,
+                #14b8a6
+            );
+
+            min-height: 100vh;
+
+            color: #263238;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.18);
+
+            margin-bottom: 20px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+
+            color: #0f766e;
+
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 7px 0 0;
+
+            color: #607d8b;
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn {
+            text-decoration: none;
+
+            background: #0f766e;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 9px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #115e59;
+
+            transform: translateY(-1px);
+        }
+
+        /* MAIN CARD */
+
+        .card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .card h2 {
+            margin-top: 0;
+
+            color: #0f766e;
+
+            margin-bottom: 20px;
+        }
+
+        /* TABLE */
+
+        .table-container {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 850px;
+        }
+
+        th {
+            background: #0f766e;
+
+            color: white;
+
+            padding: 14px;
+
+            text-align: left;
+
+            font-size: 14px;
+        }
+
+        td {
+            padding: 14px;
+
+            border-bottom: 1px solid #e0f2f1;
+
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f0fdfa;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            font-size: 13px;
+        }
+
+        .pending {
+            background: #fef3c7;
+
+            color: #92400e;
+        }
+
+        .approved {
+            background: #d1fae5;
+
+            color: #065f46;
+        }
+
+        .rejected {
+            background: #fee2e2;
+
+            color: #991b1b;
+        }
+
+        /* ACTION BUTTONS */
+
+        .action-form {
+            display: inline-block;
+
+            margin-right: 5px;
+        }
+
+        .approve-btn,
+        .reject-btn {
+            border: none;
+
+            padding: 8px 13px;
+
+            border-radius: 7px;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .approve-btn {
+            background: #0f766e;
+        }
+
+        .approve-btn:hover {
+            background: #115e59;
+        }
+
+        .reject-btn {
+            background: #dc3545;
+        }
+
+        .reject-btn:hover {
+            background: #b02a37;
+        }
+
+        /* NO DATA */
+
+        .no-data {
+            text-align: center;
+
+            padding: 35px;
+
+            color: #607d8b;
+
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+
+            color: white;
+
+            margin-top: 25px;
+
+            padding-bottom: 10px;
+
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                font-size: 25px;
+            }
+
+            .back-btn {
+                width: 100%;
+
+                text-align: center;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                📝 Leave Requests
+            </h1>
+
+            <p>
+                Manage employee leave applications
+            </p>
+
+        </div>
+
+
+        <a
+            href="/dashboard"
+            class="back-btn"
+        >
+            ← Admin Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- LEAVE REQUEST CARD -->
+
+    <div class="card">
+
+        <h2>
+            📋 Employee Leave Requests
+        </h2>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Employee ID
+                        </th>
+
+                        <th>
+                            Employee Name
+                        </th>
+
+                        <th>
+                            Leave Date
+                        </th>
+
+                        <th>
+                            Reason
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                {% for request in requests %}
+
+                <tr>
+
+                    <!-- ID -->
+
+                    <td>
+                        {{ request[0] }}
+                    </td>
+
+
+                    <!-- EMPLOYEE ID -->
+
+                    <td>
+                        <strong>
+                            {{ request[1] }}
+                        </strong>
+                    </td>
+
+
+                    <!-- EMPLOYEE NAME -->
+
+                    <td>
+                        {{ request[2] or "Unknown" }}
+                    </td>
+
+
+                    <!-- LEAVE DATE -->
+
+                    <td>
+                        {{ request[3] }}
+                    </td>
+
+
+                    <!-- REASON -->
+
+                    <td>
+                        {{ request[4] or "-" }}
+                    </td>
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        {% if request[5] == "Approved" %}
+
+                        <span class="status approved">
+                            🟢 Approved
+                        </span>
+
+                        {% elif request[5] == "Rejected" %}
+
+                        <span class="status rejected">
+                            🔴 Rejected
+                        </span>
+
+                        {% else %}
+
+                        <span class="status pending">
+                            🟠 Pending
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- ACTION -->
+
+                    <td>
+
+
+                        {% if request[5] == "Pending" %}
+
+
+                        <!-- APPROVE -->
+
+                        <form
+                            method="POST"
+                            action="/approve_leave/{{ request[0] }}"
+                            class="action-form"
+                        >
+
+                            <button
+                                type="submit"
+                                class="approve-btn"
+                            >
+                                ✓ Approve
+                            </button>
+
+                        </form>
+
+
+                        <!-- REJECT -->
+
+                        <form
+                            method="POST"
+                            action="/reject_leave/{{ request[0] }}"
+                            class="action-form"
+                        >
+
+                            <button
+                                type="submit"
+                                class="reject-btn"
+                            >
+                                ✕ Reject
+                            </button>
+
+                        </form>
+
+
+                        {% else %}
+
+                        <span>
+                            —
+                        </span>
+
+                        {% endif %}
+
+
+                    </td>
+
+                </tr>
+
+
+                {% else %}
+
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="no-data"
+                    >
+                        📭 No leave requests found.
+                    </td>
+
+                </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Employee Attendance Management System
+        <br>
+
+        Admin Panel
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

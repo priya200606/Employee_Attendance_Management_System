@@ -2,34 +2,544 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Attendance Report</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Attendance Report - EAMS</title>
 
-<style>
+    <style>
 
-body{
-    background:#f4f6f9;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-.container{
-    margin-top:40px;
-}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #F1F7F6;
+            color: #123333;
+        }
 
-.card{
-    border-radius:15px;
-}
 
-h2{
-    text-align:center;
-    color:#0d6efd;
-    margin-bottom:20px;
-}
+        /* ================================
+           HEADER
+        ================================= */
 
-</style>
+        .top-header {
+            background: #073F3F;
+            color: white;
+            padding: 18px 35px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            display: block;
+            font-size: 10px;
+            font-weight: normal;
+            opacity: 0.8;
+            letter-spacing: 0;
+        }
+
+        .header-title {
+            font-size: 14px;
+        }
+
+
+        /* ================================
+           CONTAINER
+        ================================= */
+
+        .container {
+            width: 94%;
+            max-width: 1250px;
+            margin: 30px auto;
+        }
+
+
+        /* ================================
+           PAGE HEADER
+        ================================= */
+
+        .page-header {
+            background: white;
+            padding: 22px 25px;
+
+            border-radius: 12px;
+            margin-bottom: 20px;
+
+            border-left: 5px solid #087F7B;
+
+            box-shadow:
+                0 4px 15px rgba(7, 63, 63, 0.08);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 7px;
+
+            color: #073F3F;
+
+            font-size: 25px;
+        }
+
+        .page-header p {
+            margin: 0;
+
+            color: #6B7F7F;
+
+            font-size: 14px;
+        }
+
+
+        /* ================================
+           REPORT BUTTONS
+        ================================= */
+
+        .report-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+
+        /* ================================
+           PRINT / DOWNLOAD BUTTON
+        ================================= */
+
+        .print-btn {
+            border: none;
+
+            background: #087F7B;
+
+            color: white;
+
+            padding: 11px 17px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .print-btn:hover {
+            background: #066B68;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ================================
+           SUMMARY CARDS
+        ================================= */
+
+        .summary {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(180px, 1fr));
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            border: 1px solid #D8E8E7;
+
+            box-shadow:
+                0 4px 12px rgba(7, 63, 63, 0.07);
+
+            border-left: 4px solid #087F7B;
+        }
+
+        .summary-card h3 {
+            margin: 0 0 8px;
+
+            font-size: 13px;
+
+            color: #718585;
+        }
+
+        .summary-number {
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #073F3F;
+        }
+
+
+        /* ================================
+           TABLE CARD
+        ================================= */
+
+        .table-card {
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 22px;
+
+            border: 1px solid #D8E8E7;
+
+            box-shadow:
+                0 5px 18px rgba(7, 63, 63, 0.08);
+        }
+
+        .table-title {
+            margin-bottom: 18px;
+        }
+
+        .table-title h2 {
+            margin: 0 0 5px;
+
+            color: #073F3F;
+
+            font-size: 18px;
+        }
+
+        .table-title p {
+            margin: 0;
+
+            color: #789090;
+
+            font-size: 12px;
+        }
+
+
+        /* ================================
+           TABLE
+        ================================= */
+
+        .table-container {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 1000px;
+
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #073F3F;
+
+            color: white;
+
+            padding: 13px 11px;
+
+            text-align: left;
+
+            font-size: 12px;
+        }
+
+        th:first-child {
+            border-radius: 7px 0 0 7px;
+        }
+
+        th:last-child {
+            border-radius: 0 7px 7px 0;
+        }
+
+        td {
+            padding: 12px 11px;
+
+            border-bottom: 1px solid #E1ECEB;
+
+            color: #365555;
+
+            font-size: 12px;
+        }
+
+        tbody tr {
+            transition: 0.15s;
+        }
+
+        tbody tr:hover {
+            background: #F0F9F8;
+        }
+
+
+        /* ================================
+           EMPLOYEE ID
+        ================================= */
+
+        .employee-id {
+            display: inline-block;
+
+            background: #E8F5F4;
+
+            color: #087F7B;
+
+            padding: 5px 8px;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+
+            font-size: 11px;
+        }
+
+
+        /* ================================
+           STATUS
+        ================================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        .present {
+            background: #DDF5E7;
+
+            color: #167344;
+        }
+
+        .absent {
+            background: #FDE4E4;
+
+            color: #B52B2B;
+        }
+
+
+        /* ================================
+           ATTENDANCE TYPE
+        ================================= */
+
+        .attendance-type {
+            display: inline-block;
+
+            background: #E8F5F4;
+
+            color: #087F7B;
+
+            border: 1px solid #C4E2E0;
+
+            padding: 5px 8px;
+
+            border-radius: 6px;
+
+            font-size: 11px;
+        }
+
+
+        /* ================================
+           WORKING HOURS
+        ================================= */
+
+        .hours {
+            font-weight: bold;
+
+            color: #087F7B;
+        }
+
+
+        /* ================================
+           EMPTY
+        ================================= */
+
+        .empty-box {
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #718585;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+
+            margin-bottom: 12px;
+        }
+
+        .empty-box h3 {
+            margin: 0 0 7px;
+
+            color: #073F3F;
+        }
+
+        .empty-box p {
+            margin: 0;
+
+            font-size: 13px;
+        }
+
+
+        /* ================================
+           BOTTOM BUTTON
+        ================================= */
+
+        .bottom-actions {
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #E8F5F4;
+
+            color: #087F7B;
+
+            border: 1px solid #B7DCDA;
+
+            padding: 11px 17px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #D8EEEC;
+
+            color: #073F3F;
+        }
+
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        .footer {
+            text-align: center;
+
+            color: #789090;
+
+            font-size: 12px;
+
+            margin: 30px 0 20px;
+        }
+
+
+        /* ================================
+           PRINT
+        ================================= */
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            .top-header {
+                background: #073F3F !important;
+
+                print-color-adjust: exact;
+
+                -webkit-print-color-adjust: exact;
+            }
+
+            .report-buttons,
+            .bottom-actions {
+                display: none;
+            }
+
+            .page-header,
+            .table-card,
+            .summary-card {
+                box-shadow: none;
+            }
+
+            .container {
+                width: 100%;
+
+                max-width: none;
+            }
+
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 650px) {
+
+            .top-header {
+                padding: 15px 20px;
+            }
+
+            .header-title {
+                display: none;
+            }
+
+            .container {
+                width: 94%;
+
+                margin: 20px auto;
+            }
+
+            .page-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .report-buttons {
+                width: 100%;
+
+                flex-direction: column;
+            }
+
+            .report-buttons .print-btn {
+                width: 100%;
+            }
+
+            .table-card {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -37,74 +547,618 @@ h2{
 <body>
 
 
-<div class="container">
+    <!-- ================================
+         HEADER
+    ================================= -->
+
+    <div class="top-header">
+
+        <div class="logo">
+
+            EAMS
+
+            <span>
+                Employee Attendance Management System
+            </span>
+
+        </div>
+
+        <div class="header-title">
+            📊 Admin Panel
+        </div>
+
+    </div>
 
 
-<div class="card shadow">
+    <!-- ================================
+         MAIN
+    ================================= -->
+
+    <div class="container">
 
 
-<div class="card-body">
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    📊 Attendance Report
+                </h1>
+
+                <p>
+                    View complete employee attendance records.
+                </p>
+
+            </div>
 
 
-<h2>📊 Attendance Report</h2>
+            <!-- PRINT + DOWNLOAD BUTTONS -->
+
+            <div class="report-buttons">
+
+                <button
+                    class="print-btn"
+                    onclick="window.print()"
+                >
+                    🖨️ Print Report
+                </button>
 
 
-<table class="table table-bordered">
+                <button
+                    class="print-btn"
+                    onclick="downloadReport()"
+                >
+                    📥 Download Report
+                </button>
+
+            </div>
+
+        </div>
 
 
-<thead class="table-primary">
+        <!-- ================================
+             SUMMARY
+        ================================= -->
 
-<tr>
-
-<th>ID</th>
-<th>Employee ID</th>
-<th>Date</th>
-<th>Status</th>
-
-</tr>
-
-</thead>
+        <div class="summary">
 
 
-<tbody>
+            <div class="summary-card">
+
+                <h3>
+                    Total Records
+                </h3>
+
+                <div
+                    class="summary-number"
+                    id="totalRecords"
+                >
+                    0
+                </div>
+
+            </div>
 
 
-{% for row in attendance %}
+            <div class="summary-card">
 
-<tr>
+                <h3>
+                    Present
+                </h3>
 
-<td>{{ row[0] }}</td>
+                <div
+                    class="summary-number"
+                    id="presentRecords"
+                >
+                    0
+                </div>
 
-<td>{{ row[1] }}</td>
-
-<td>{{ row[2] }}</td>
-
-<td>{{ row[3] }}</td>
-
-</tr>
-
-
-{% endfor %}
+            </div>
 
 
-</tbody>
+            <div class="summary-card">
+
+                <h3>
+                    Absent
+                </h3>
+
+                <div
+                    class="summary-number"
+                    id="absentRecords"
+                >
+                    0
+                </div>
+
+            </div>
 
 
-</table>
+            <div class="summary-card">
+
+                <h3>
+                    Working Hours
+                </h3>
+
+                <div
+                    class="summary-number"
+                    id="workingRecords"
+                >
+                    0
+                </div>
+
+            </div>
 
 
-<a href="/dashboard" class="btn btn-secondary w-100">
-Back to Dashboard
-</a>
+        </div>
 
 
-</div>
+        <!-- ================================
+             TABLE
+        ================================= -->
+
+        <div class="table-card">
 
 
-</div>
+            <div class="table-title">
+
+                <h2>
+                    📋 Attendance Records
+                </h2>
+
+                <p>
+                    Employee attendance including check-in,
+                    check-out and working hours.
+                </p>
+
+            </div>
 
 
-</div>
+            {% if attendance %}
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Employee ID
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Check In
+                            </th>
+
+                            <th>
+                                Check Out
+                            </th>
+
+                            <th>
+                                Attendance Type
+                            </th>
+
+                            <th>
+                                Working Hours
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        {% for record in attendance %}
+
+
+                        <tr>
+
+
+                            <!-- ID -->
+
+                            <td>
+                                {{ record[0] }}
+                            </td>
+
+
+                            <!-- EMPLOYEE ID -->
+
+                            <td>
+
+                                <span class="employee-id">
+
+                                    {{ record[1] }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- DATE -->
+
+                            <td>
+                                {{ record[2] }}
+                            </td>
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if record[3] == "Present" %}
+
+                                    <span class="status present">
+                                        🟢 Present
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status absent">
+                                        🔴 {{ record[3] }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- CHECK IN -->
+
+                            <td>
+
+                                {% if record[4] %}
+
+                                    {{ record[4] }}
+
+                                {% else %}
+
+                                    -
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- CHECK OUT -->
+
+                            <td>
+
+                                {% if record[5] %}
+
+                                    {{ record[5] }}
+
+                                {% else %}
+
+                                    -
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- ATTENDANCE TYPE -->
+
+                            <td>
+
+                                {% if record[6] %}
+
+                                    <span class="attendance-type">
+
+                                        {{ record[6] }}
+
+                                    </span>
+
+                                {% else %}
+
+                                    -
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- WORKING HOURS -->
+
+                            <td>
+
+                                <span class="hours">
+
+                                    {{ record[7] }}
+
+                                </span>
+
+                            </td>
+
+
+                        </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- NO RECORDS -->
+
+            <div class="empty-box">
+
+                <div class="empty-icon">
+                    📊
+                </div>
+
+                <h3>
+                    No Attendance Records
+                </h3>
+
+                <p>
+                    There are currently no attendance records available.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <div class="bottom-actions">
+
+            <a
+                href="/dashboard"
+                class="back-btn"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            Employee Attendance Management System
+
+            <br>
+
+            Admin Panel · BCA Project
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
+
+    <script>
+
+
+        /* ================================
+           SUMMARY CALCULATION
+        ================================= */
+
+        const rows =
+            document.querySelectorAll("tbody tr");
+
+        let total = 0;
+
+        let present = 0;
+
+        let absent = 0;
+
+        let working = 0;
+
+
+        rows.forEach(function(row) {
+
+            const cells =
+                row.querySelectorAll("td");
+
+
+            if (cells.length >= 8) {
+
+                total++;
+
+
+                const status =
+                    cells[3].innerText.trim();
+
+
+                const hours =
+                    cells[7].innerText.trim();
+
+
+                if (status.includes("Present")) {
+
+                    present++;
+
+                }
+
+
+                if (status.includes("Absent")) {
+
+                    absent++;
+
+                }
+
+
+                if (
+                    hours !== "-" &&
+                    hours !== ""
+                ) {
+
+                    working++;
+
+                }
+
+            }
+
+        });
+
+
+        document.getElementById(
+            "totalRecords"
+        ).innerText = total;
+
+
+        document.getElementById(
+            "presentRecords"
+        ).innerText = present;
+
+
+        document.getElementById(
+            "absentRecords"
+        ).innerText = absent;
+
+
+        document.getElementById(
+            "workingRecords"
+        ).innerText = working;
+
+
+
+        /* ================================
+           DOWNLOAD REPORT
+        ================================= */
+
+        function downloadReport() {
+
+
+            const table =
+                document.querySelector("table");
+
+
+            if (!table) {
+
+                alert(
+                    "No attendance records available."
+                );
+
+                return;
+
+            }
+
+
+            let csv = [];
+
+
+            const rows =
+                table.querySelectorAll("tr");
+
+
+            rows.forEach(function(row) {
+
+
+                const cols =
+                    row.querySelectorAll(
+                        "th, td"
+                    );
+
+
+                let rowData = [];
+
+
+                cols.forEach(function(col) {
+
+
+                    let text =
+                        col.innerText
+                            .replace(/,/g, " ")
+                            .replace(/\n/g, " ")
+                            .trim();
+
+
+                    rowData.push(text);
+
+                });
+
+
+                csv.push(
+                    rowData.join(",")
+                );
+
+            });
+
+
+            const csvContent =
+                csv.join("\n");
+
+
+            const blob =
+                new Blob(
+                    [csvContent],
+                    {
+                        type:
+                            "text/csv;charset=utf-8;"
+                    }
+                );
+
+
+            const url =
+                URL.createObjectURL(blob);
+
+
+            const link =
+                document.createElement("a");
+
+
+            link.setAttribute(
+                "href",
+                url
+            );
+
+
+            link.setAttribute(
+                "download",
+                "attendance_report.csv"
+            );
+
+
+            document.body.appendChild(link);
+
+
+            link.click();
+
+
+            document.body.removeChild(link);
+
+
+            URL.revokeObjectURL(url);
+
+        }
+
+    </script>
 
 
 </body>
